@@ -12,6 +12,30 @@ class Document
         void writeFile();
         vector <string> vector;
         int samanPlace;
-        void commandToDo(string command);
         //string fileName;
+
+        //Cocuments commands
+                
+        void commandLastRow(); //$
+
+        void commandDeleteRow(); //d
+
+        void commandSearchText(); // /text/
+
+        void commandReplaceOldByNew(); // s/old/new/
+
+        void commandAddRowToAnother(); // j
+
+        void commandAddRowsAfter(); // a
+
+        void commandStopAddingRows(); // .
+
+        void commandChangeThisRow(); // c
+
+        void commandAddRowsBefore(); // i
+
+        void commandWriteToFile(); // w file
+
+        void commandGoToRow(); // number
+
 };
