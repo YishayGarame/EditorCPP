@@ -1,4 +1,5 @@
 #include <iostream>
+#include <regex> 
 #include "Document.h"
 using namespace std;
 

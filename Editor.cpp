@@ -6,158 +6,120 @@
 
 void Editor::loop()
 {
+    //regex a("\\(*)*\\"); // Geeks followed by any characte
+    string textInput;
     string input;
-    while(input!="q")
+    getline(cin,input);
+    while(input != "q")
     {
-         cin>>input;
+        // getline(cin,input);
        
         if( input ==  "$")
         {
             document.commandLastRow();
-            cin.ignore();
-            cout << input << endl ;
         }
-        if( input ==  "d")
+        else if( input ==  "d")
          {
             document.commandDeleteRow();
-            cout << input << endl ;
-
+            cin.clear();
+            //input.clear();  
         }
-        if( input ==  "/text/")
+        else  if( (input.at(0) == '/') && input.at(input.length()-1) == '/')
          {
-            document.commandSearchText();
-            cout << input << endl ;
+            textInput = input.substr(1,input.length()-2);
+            document.commandSearchText(textInput);
+            //cout << input << endl ;
 
         }
-        if( input ==  "s/old/new")
+        else if( input ==  "s/old/new")
          {
             document.commandReplaceOldByNew();
             cout << input << endl ;
 
         }
-        if( input ==  "j")
+        else if( input ==  "j")
          {
-            document.commandAddRowToAnother();
-            cout << input << endl ;
+            getline(cin,input);
+            if(input != ".")
+            {
+            document.commandAddRowToAnother(input);
+            }
+            cin.clear();
+        }
+        else if( input ==  "a")
+         {
+            while(input != ".")
+             {
+                getline(cin,input);
+                if(input != ".")
+                {
+                document.commandAddRowsAfter(input);
+                }
+             }
+             cin.clear();
 
         }
-        if( input ==  "a")
+        else if( input ==  "i")
          {
-            document.commandAddRowsAfter();
-            cout << input << endl ;
-
-        }
-        if( input ==  ".")
-         {
-            document.commandStopAddingRows();
-            cout << input << endl ;
+            while(input != ".")
+             {  
+                getline(cin,input);
+                if(input != ".")
+                {
+                document.commandAddRowsBefore(input);
+                }
+             }
+             cin.clear();
         }
         if( input ==  "c")
          {
-            document.commandChangeThisRow();
-            cout << input << endl ;
-        }
-        if( input ==  "i")
-         {
-            document.commandAddRowsBefore();
-            cout << input << endl ;
-
-        }
-        if( input ==  "w")
-         {
-            document.commandWriteToFile();
-            cout << input << endl ;
+            while(input != ".")
+             {
+                getline(cin,input);
+                if(input != ".")
+                {
+                document.commandChangeThisRow(input);
+                }
+             }
+             cin.clear();
         }
 
-        if( input ==  "number")
+        else if( input ==  ".")
+         {
+            document.commandStopAddingRows();
+            input.clear();
+            cin.clear();
+        }
+        else if( input.at(0) == 'w')
+         {
+             string fileName = input.substr(2,input.back());
+            document.commandWriteToFile(fileName);
+            cout << input << endl ;
+        }
+
+        else if( input ==  "number")
          {
             document.commandGoToRow();
             cout << input << endl ;
         }
+        // else if( cin.get() ==  '\n')
+        //  {
+        //     cout << input << ". input "<< endl ;
+
+        //     cout << "enter" << endl ;
+        // }
         else
         {
             cout << "default commands" << endl;
+             cin.clear();
+
         }
-        
+        getline(cin,input);
+
        
     }
 }
 
-/*
- string input;
-    while(input!="q")
-    {
-         cin>>input;
 
-        switch (input) 
-        {
-        case '$':
-        {
-            Document::document.commandLastRow();
-            cout << input << endl ;
-        }
-        case 'd':
-         {
-            Document::document.commandDeleteRow();
-            cout << input << endl ;
-
-        }
-        case '/text/':
-         {
-            Document::document.commandSearchText();
-            cout << input << endl ;
-
-        }
-        case 's/old/new/':
-         {
-            Document::document.commandReplaceOldByNew();
-            cout << input << endl ;
-
-        }
-        case 'j':
-         {
-            Document::document.commandAddRowToAnother();
-            cout << input << endl ;
-
-        }
-        case 'a':
-         {
-            Document::document.commandAddRowsAfter();
-            cout << input << endl ;
-
-        }
-        case '.':
-         {
-            Document::document.commandStopAddingRows();
-            cout << input << endl ;
-        }
-        case 'c':
-         {
-            Document::document.commandChangeThisRow();
-            cout << input << endl ;
-        }
-        case 'i':
-         {
-            Document::document.commandAddRowsBefore();
-            cout << input << endl ;
-
-        }
-        case 'w':
-         {
-            Document::document.commandWriteToFile();
-            cout << input << endl ;
-        }
-
-        case 'number':
-         {
-            Document::document.commandGoToRow();
-            cout << input << endl ;
-        }
-          default:
-        {
-            cout << "default commands" << endl;
-            break;
-        }
-        */
 
 

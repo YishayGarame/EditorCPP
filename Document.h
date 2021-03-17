@@ -20,22 +20,21 @@ class Document
 
         void commandDeleteRow(); //d
 
-        void commandSearchText(); // /text/
+        void commandAddRowsAfter(string input); // a
 
+        void commandAddRowsBefore(string input); // i
+
+        void commandAddRowToAnother(string input); // j
+      
+        void commandChangeThisRow(string input); // c
+        
         void commandReplaceOldByNew(); // s/old/new/
+       
+        void commandSearchText(string textToFind); // /text/
 
-        void commandAddRowToAnother(); // j
-
-        void commandAddRowsAfter(); // a
-
-        void commandStopAddingRows(); // .
-
-        void commandChangeThisRow(); // c
-
-        void commandAddRowsBefore(); // i
-
-        void commandWriteToFile(); // w file
+        void commandWriteToFile(string fileName); // w file
 
         void commandGoToRow(); // number
 
+        void commandStopAddingRows(); // .
 };
