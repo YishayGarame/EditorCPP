@@ -8,7 +8,7 @@ class Document
 
     public:
         int samanPlace = 0 ;
-        Document():samanPlace(0){};
+        Document():samanPlace(1){};
         void FileReader(string fileName);
         void writeFile();
         vector<string> lines; 

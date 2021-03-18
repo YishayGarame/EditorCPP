@@ -2,7 +2,7 @@
 
 void Document::FileReader(string fileName)
 {
-  samanPlace =0 ;
+  samanPlace =1 ;
   string line;
   ifstream myfile (fileName);
   if (myfile.is_open())
