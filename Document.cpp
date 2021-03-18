@@ -73,6 +73,7 @@ void Document::commandReplaceOldByNew(string old, string newWord)
     string partA = tmp.substr(0,whereToReplace);
     string partB = tmp.substr(whereToReplace+old.length(),tmp.length()-1);
     string total = partA + newWord + partB;
+    lines[samanPlace] = total;
   }
 }
 
