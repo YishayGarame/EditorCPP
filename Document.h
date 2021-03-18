@@ -23,7 +23,7 @@ class Document
 
         void commandAddRowsBefore(string input); // i
 
-        void commandAddRowToAnother(string input); // j
+        void commandAddRowToAnother(); // j
       
         void commandChangeThisRow(string input); // c
         

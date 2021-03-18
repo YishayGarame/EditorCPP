@@ -46,12 +46,7 @@ void Editor::loop()
         }
         else if( input ==  "j")
          {
-            getline(cin,input);
-            if(input != ".")
-            {
-            document.commandAddRowToAnother(input);
-            }
-            cin.clear();
+            document.commandAddRowToAnother();          
         }
         else if( input ==  "a")
          {

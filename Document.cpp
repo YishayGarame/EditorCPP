@@ -44,7 +44,7 @@ void Document::commandDeleteRow()
 void Document::commandSearchText(string textToFind)
 {
 int curSamanPlace= samanPlace;
- for(int i = curSamanPlace-1; i < lines.size(); i++)
+ for(int i = curSamanPlace; i < lines.size(); i++)
 	{
        if (lines[i].find(textToFind) != string::npos )
         {
@@ -56,7 +56,7 @@ int curSamanPlace= samanPlace;
   {
        if (lines[i].find(textToFind) != string::npos)
           {
-          samanPlace = i-1 ;
+          samanPlace = i ;
           break;
           }
     
@@ -72,25 +72,18 @@ void Document::commandReplaceOldByNew(string old, string newWord)
     int whereToReplace = lines[samanPlace].find(old);
     string partA = tmp.substr(0,whereToReplace);
     string partB = tmp.substr(whereToReplace+old.length(),tmp.length()-1);
-    //cout << "part a" << partA << endl;
-    //cout << "part b" << partB << endl;
-
     string total = partA + newWord + partB;
-    //lines[samanPlace].at()
-    cout << "toal after rep" << total << endl;
   }
 }
 
 // j
-void Document::commandAddRowToAnother(string input)
+void Document::commandAddRowToAnother()
 {
-    //cout << samanPlace << "saman place" << endl;
-   // cout << lines.at(samanPlace-1) << "lines last" << endl;
-    string tempString = lines[samanPlace-1];
-    //cout << tempString << "before" << endl ;
-    tempString += " " + input;
-   // cout << tempString << "after" << endl ;
-    lines.insert(lines.begin()+samanPlace-1,input);
+    string tempString = lines[samanPlace];
+    string nextLine = lines[samanPlace+1];
+    lines.erase(lines.begin()+samanPlace+1);
+    tempString += " " + nextLine;
+    lines.insert(lines.begin()+samanPlace,tempString);
     samanPlace++;  
 }
 
