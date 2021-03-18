@@ -89,7 +89,7 @@ void Editor::loop()
                 document.commandChangeThisRow(input);
                 }
              }
-
+                document.commandDeleteRow();
              cin.clear();
         }
 

@@ -106,7 +106,7 @@ void Document::commandAddRowsAfter(string input)
 {
     //cout << samanPlace << "saman place" << endl;
    // cout << vector.at(samanPlace-1) << "vector last" << endl;
-    cout << input << "saman" << samanPlace << endl;
+    //cout << input << "saman" << samanPlace << endl;
     vector.insert(vector.begin()+samanPlace,input);
     samanPlace++;  
 }
@@ -118,7 +118,13 @@ void Document::commandChangeThisRow(string input)
 
     vector.insert(vector.begin()+samanPlace-1,input);
     cout << "saman " << samanPlace << endl;
+    cout << "before " << vector[samanPlace]<<endl;
     samanPlace++; 
+    cout << "after " << vector[samanPlace]<<endl;
+    vector[samanPlace].erase();
+    cout << "after deleetted " << vector[samanPlace]<<endl;
+
+
 } 
 
 // i
