@@ -11,7 +11,7 @@ class Document
         Document():samanPlace(0){};
         void FileReader(string fileName);
         void writeFile();
-        vector <string> vector;
+        vector<string> lines; 
 
         //Cocuments commands
                 
