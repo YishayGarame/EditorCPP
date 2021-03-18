@@ -13,10 +13,6 @@ void Document::FileReader(string fileName)
       //cout << line <<endl;
       samanPlace++;
     }
-    	for(int i = 0; i < lines.size(); i++)
-	{
-		//cout << lines[i] << i << endl;	
-	}
     myfile.close();
   }
 
@@ -37,7 +33,7 @@ void Document::commandDeleteRow()
 
   if(lines.size() > 0 && samanPlace >= 1)
   {
-    lines.erase (lines.begin()+samanPlace-1);
+    lines.erase (lines.begin()+samanPlace);
     samanPlace--;
   }
    else cout << "File is Empty" << endl ;
@@ -48,13 +44,11 @@ void Document::commandDeleteRow()
 void Document::commandSearchText(string textToFind)
 {
 int curSamanPlace= samanPlace;
- for(int i = curSamanPlace; i < lines.size(); i++)
+ for(int i = curSamanPlace-1; i < lines.size(); i++)
 	{
        if (lines[i].find(textToFind) != string::npos )
         {
-          cout << lines[i] << endl;
           samanPlace = i ;
-          cout << "saman place " << samanPlace << endl ;
           break;
         }
 	}
@@ -62,8 +56,7 @@ int curSamanPlace= samanPlace;
   {
        if (lines[i].find(textToFind) != string::npos)
           {
-          samanPlace = i ;
-          cout << "saman place " << samanPlace << endl ;
+          samanPlace = i-1 ;
           break;
           }
     
