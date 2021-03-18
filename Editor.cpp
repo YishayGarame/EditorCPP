@@ -4,6 +4,7 @@
         document.FileReader(fileName);
     };
 
+
 void Editor::loop()
 {
     //regex a("\\(*)*\\"); // Geeks followed by any characte
@@ -27,14 +28,20 @@ void Editor::loop()
         else  if( (input.at(0) == '/') && input.at(input.length()-1) == '/')
          {
             textInput = input.substr(1,input.length()-2);
+            //cout << " word to search " << textInput <<endl;
             document.commandSearchText(textInput);
             //cout << input << endl ;
 
         }
-        else if( input ==  "s/old/new")
+        else if( (input.at(0) == 's') && input.at(1) == '/' && input.at(input.length()-1) == '/' && input.find("/",2,input.length()-2))
          {
-            document.commandReplaceOldByNew();
-            cout << input << endl ;
+            string tmpStr = input.substr(2,input.length()-3);
+            int delimeterPos = tmpStr.find("/");
+            string old = tmpStr.substr(0,delimeterPos);
+            cout<< "old: "<<old<<endl;
+            string newWord = tmpStr.substr(delimeterPos+1,tmpStr.length()-1);
+            cout<<"new: "<< newWord<<endl;
+            document.commandReplaceOldByNew(old,newWord);
 
         }
         else if( input ==  "j")
@@ -53,6 +60,7 @@ void Editor::loop()
                 getline(cin,input);
                 if(input != ".")
                 {
+                 cout << "alon shat"<<endl;
                 document.commandAddRowsAfter(input);
                 }
              }
@@ -81,12 +89,12 @@ void Editor::loop()
                 document.commandChangeThisRow(input);
                 }
              }
+
              cin.clear();
         }
 
         else if( input ==  ".")
          {
-            document.commandStopAddingRows();
             input.clear();
             cin.clear();
         }
@@ -97,17 +105,34 @@ void Editor::loop()
             cout << input << endl ;
         }
 
-        else if( input ==  "number")
+        else if(isdigit(input[0]) || isdigit(input[1]))
          {
-            document.commandGoToRow();
-            cout << input << endl ;
-        }
-        // else if( cin.get() ==  '\n')
-        //  {
-        //     cout << input << ". input "<< endl ;
+             int type; // plus=1 or minus=0
+             int rowNumber;
+             if(isdigit(input[0]))
+             {
+                type=0;
+                rowNumber =stoi(input);
+                document.commandGoToRow(rowNumber,type);
+             }
+             else // it has "+" or "-" before"
+             {
+                string tmpNum;
+                tmpNum = input.substr(1, input.back());
+                rowNumber = stoi(tmpNum);
+                 if(input.at(0) == '+')
+                 {
+                     type = 1;
+                     document.commandGoToRow(rowNumber,type);
 
-        //     cout << "enter" << endl ;
-        // }
+                 }
+                 else
+                 {
+                    type =-1 ;
+                    document.commandGoToRow(rowNumber,type);
+                 }
+             }    
+        }
         else
         {
             cout << "default commands" << endl;

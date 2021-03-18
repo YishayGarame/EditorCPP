@@ -7,12 +7,11 @@ class Document
     private:
 
     public:
-        Document(){};
+        int samanPlace = 0 ;
+        Document():samanPlace(0){};
         void FileReader(string fileName);
         void writeFile();
         vector <string> vector;
-        int samanPlace;
-        //string fileName;
 
         //Cocuments commands
                 
@@ -28,13 +27,12 @@ class Document
       
         void commandChangeThisRow(string input); // c
         
-        void commandReplaceOldByNew(); // s/old/new/
+        void commandReplaceOldByNew(string old, string newWord); // s/old/new/
        
         void commandSearchText(string textToFind); // /text/
 
         void commandWriteToFile(string fileName); // w file
 
-        void commandGoToRow(); // number
+        void commandGoToRow(int rowNumber,int type); // number
 
-        void commandStopAddingRows(); // .
 };

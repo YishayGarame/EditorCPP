@@ -9,7 +9,8 @@ class Editor
         Document document;
 
     public:
-        Editor(){};
+        Editor(): document(){};
         Editor(string fileName);
         void loop();
+
 };

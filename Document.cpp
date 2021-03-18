@@ -34,24 +34,12 @@ void Document::commandLastRow()
 //d
 void Document::commandDeleteRow()
 {
-  		cout << "saman" <<samanPlace<< endl;	
 
-   	for(int i = 0; i < vector.size(); i++)
-	{
-		cout << vector[i] << i << endl;	
-	}
-  if(vector.size() > 0)
+  if(vector.size() > 0 && samanPlace >= 1)
   {
     vector.erase (vector.begin()+samanPlace-1);
     samanPlace--;
-    cout << "after" << endl;	
-   	for(int i = 0; i < vector.size(); i++)
-	  {
-		cout << vector[i] << i << endl;	
-	  }
-    cout << samanPlace << endl ;
   }
-
    else cout << "File is Empty" << endl ;
 
 }
@@ -59,19 +47,45 @@ void Document::commandDeleteRow()
 // /text/
 void Document::commandSearchText(string textToFind)
 {
- // for(int i = samanPlace; i < vector.size(); i++)
-	//{
-    // if(vector.getline(i).find(textToFind))
-     //{
-		  //cout << vector[i] << i << endl;	
-    // }
-//	}
+int curSamanPlace= samanPlace;
+ for(int i = curSamanPlace; i < vector.size(); i++)
+	{
+       if (vector[i].find(textToFind) != string::npos )
+        {
+          cout << vector[i] << endl;
+          samanPlace = i ;
+          cout << "saman place " << samanPlace << endl ;
+          break;
+        }
+	}
+  for(int i =0 ; i< curSamanPlace ; i++)
+  {
+       if (vector[i].find(textToFind) != string::npos)
+          {
+          samanPlace = i ;
+          cout << "saman place " << samanPlace << endl ;
+          break;
+          }
+    
+  }
 }
 
 // s/old/new/
-void Document::commandReplaceOldByNew()
+void Document::commandReplaceOldByNew(string old, string newWord)
 {
+  if(vector[samanPlace].find(old) != string::npos)
+  {
+    string tmp = vector[samanPlace];
+    int whereToReplace = vector[samanPlace].find(old);
+    string partA = tmp.substr(0,whereToReplace);
+    string partB = tmp.substr(whereToReplace+old.length(),tmp.length()-1);
+    //cout << "part a" << partA << endl;
+    //cout << "part b" << partB << endl;
 
+    string total = partA + newWord + partB;
+    //vector[samanPlace].at()
+    cout << "toal after rep" << total << endl;
+  }
 }
 
 // j
@@ -101,10 +115,9 @@ void Document::commandAddRowsAfter(string input)
 // c
 void Document::commandChangeThisRow(string input)
 {
-    //cout << samanPlace << "saman place" << endl;
-   // cout << vector.at(samanPlace-1) << "vector last" << endl;
 
     vector.insert(vector.begin()+samanPlace-1,input);
+    cout << "saman " << samanPlace << endl;
     samanPlace++; 
 } 
 
@@ -121,7 +134,6 @@ void Document::commandAddRowsBefore(string input)
 // w file
 void Document::commandWriteToFile(string fileName)
 {
-samanPlace =0 ;
   string line;
   ofstream myfile;
   myfile.open(fileName);
@@ -140,21 +152,28 @@ samanPlace =0 ;
 }
 
 // number
-void Document::commandGoToRow()
+void Document::commandGoToRow(int rowNumber, int type)
 {
+  if(type == 0)
+  {
+    samanPlace = rowNumber;
+  }
+  else if (type == 1)
+  {
+    samanPlace += rowNumber;
+  }
+  else
+  {
+    samanPlace -= rowNumber;
+    if(samanPlace < 1){
+      samanPlace = 0 ;
+    }
 
+  }
 }
-
-// .
-void Document::commandStopAddingRows()
-{
-
-}
-
 
 /*
-w
+continue with c
 s/old/new
 /text/
-number
 */
