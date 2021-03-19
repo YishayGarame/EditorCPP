@@ -119,7 +119,6 @@ void Document::commandChangeThisRow(string input)
     lines.insert(lines.begin()+samanPlace-1,input);
     //cout << "saman " << samanPlace << endl;
     //cout << "before " << lines[samanPlace]<<endl;
-    samanPlace++; 
     //cout << "after " << lines[samanPlace]<<endl;
     //cout << "after deleetted " << lines[samanPlace]<<endl;
      cout<< printLine()<< endl;
