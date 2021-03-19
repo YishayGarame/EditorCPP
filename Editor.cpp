@@ -7,7 +7,6 @@
 
 void Editor::loop()
 {
-    //regex a("\\(*)*\\"); // Geeks followed by any characte
     string textInput;
     string input;
     getline(cin,input);
@@ -38,9 +37,9 @@ void Editor::loop()
             string tmpStr = input.substr(2,input.length()-3);
             int delimeterPos = tmpStr.find("/");
             string old = tmpStr.substr(0,delimeterPos);
-            cout<< "old: "<<old<<endl;
+            //cout<< "old: "<<old<<endl;
             string newWord = tmpStr.substr(delimeterPos+1,tmpStr.length()-1);
-            cout<<"new: "<< newWord<<endl;
+            //cout<<"new: "<< newWord<<endl;
             document.commandReplaceOldByNew(old,newWord);
 
         }
@@ -55,7 +54,7 @@ void Editor::loop()
                 getline(cin,input);
                 if(input != ".")
                 {
-                 cout << "alon shat"<<endl;
+                // cout << "alon shat"<<endl;
                 document.commandAddRowsAfter(input);
                 }
              }
@@ -72,6 +71,7 @@ void Editor::loop()
                 document.commandAddRowsBefore(input);
                 }
              }
+             document.samanPlace=2;
              cin.clear();
         }
         if( input ==  "c")
@@ -127,6 +127,11 @@ void Editor::loop()
                     document.commandGoToRow(rowNumber,type);
                  }
              }    
+        }
+        else if( input == "/print")
+        {
+            document.commandPrintLines();
+
         }
         else
         {
